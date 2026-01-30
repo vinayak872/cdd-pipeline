@@ -2,23 +2,27 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Run Python') {
             steps {
-                echo 'Build stage'
+                sh '''
+                echo "Running Python..."
+                cd python
+                python3 app.py
+                '''
             }
         }
 
-        stage('Test') {
+        stage('Run Java') {
             steps {
-                echo 'Test stage'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploy stage'
+                sh '''
+                echo "Running Java..."
+                cd java
+                javac Hello.java
+                java Hello
+                '''
             }
         }
     }
 }
+
 
